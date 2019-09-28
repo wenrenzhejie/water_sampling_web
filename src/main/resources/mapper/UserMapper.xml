@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it666.water_sampling.dao.UserMapper">
+    <!--public User loginByName(String username, String password);-->
+    <select id="loginByName" resultType="com.it666.water_sampling.bean.User">
+        select * from tbl_user where user_name=#{username} and password = #{password}
+    </select>
+   <!-- public User loginByQrcode(String userId);-->
+    <select id="loginByQrcode" resultType="com.it666.water_sampling.bean.User">
+        select * from tbl_user where userId = #{userId}
+    </select>
+</mapper>

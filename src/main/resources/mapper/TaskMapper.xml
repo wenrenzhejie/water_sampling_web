@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it666.water_sampling.dao.TaskMapper">
+   <!-- public List<Task> getAllTasksByUserId(String userId)-->
+    <resultMap id="allTasks" type="com.it666.water_sampling.bean.Task">
+        <result property="finished" column="isFinished"></result>
+        <result property="place.id" column="id"></result>
+        <result property="place.placeName" column="placeName"></result>
+    </resultMap>
+    <select id="getAllTasksByUserId" resultMap="allTasks">
+      select tbl_place.id,tbl_place.placeName,tbl_task.isFinished from tbl_task,tbl_place where tbl_task.placeId = tbl_place.id and tbl_task.userId= #{userId}
+    </select>
+
+    <!--public List<Task> getCurrentTasksByUserIdAndLocation(String userId, double latitude, double longitude);-->
+    <resultMap id="currentTasks" type="com.it666.water_sampling.bean.Task">
+        <id property="id" column="id"></id>
+        <result column="bottleTypeName" property="bottleType.bottleTypeName"></result>
+        <result column="reagentName" property="reagent.reagentName"></result>
+        <result column="placeName" property="place.placeName"></result>
+        <result column="latitude_one" property="place.latitudeOne"></result>
+        <result column="latitude_two" property="place.latitudeTwo"></result>
+        <result column="longitude_one" property="place.longitudeOne"></result>
+        <result column="longitude_two" property="place.longitudeTwo"></result>
+    </resultMap>
+    <select id="getCurrentTasksByUserIdAndLocation" resultMap="currentTasks">
+        select task.id,btype.bottleTypeName,reagent.reagentName,place.placeName,place.latitude_one,place.latitude_two,place.longitude_one,place.longitude_two from tbl_task as task,tbl_bottle_type as btype,tbl_reagent as reagent,tbl_place as place where task.bottle_type_Id = btype.id and task.reagentId = reagent.id and task.placeId = place.id and userId = #{userId} and task.isFinished = 0
+    </select>
+
+    <resultMap id="allUnSelectedTasks" type="com.it666.water_sampling.bean.Task">
+        <id property="id" column="id"></id>
+        <result column="bottleTypeName" property="bottleType.bottleTypeName"></result>
+        <result column="reagentName" property="reagent.reagentName"></result>
+        <result column="placeName" property="place.placeName"></result>
+    </resultMap>
+    <!--public List<Task> getAllUnSelectedTasks();-->
+    <select id="getAllUnSelectedTasks" resultMap="allUnSelectedTasks">
+        select task.id,btype.bottleTypeName,reagent.reagentName,place.placeName from tbl_task as task,tbl_bottle_type as btype,tbl_reagent as reagent,tbl_place as place where task.bottle_type_Id = btype.id and task.reagentId = reagent.id and task.placeId = place.id and task.isSelected = 0
+    </select>
+
+    <!--public void saveSelectedTasks(@Param("userId") String userId, @Param("id") List<Integer> list);-->
+    <update id="saveSelectedTasks">
+        update tbl_task set userId = #{userId},isSelected = 1 where id in
+        <foreach collection="list" index="index" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
+
+    <!-- public void saveScanBottle(@Param("id") String id, @Param("bottleId") String bottleId, @Param("date") Date date1);-->
+
+    <update id="saveScanBottle">
+        update tbl_task set bottleId = #{bottleId},finish_time=#{date},isFinished = 1 where id = #{id}
+    </update>
+</mapper>
