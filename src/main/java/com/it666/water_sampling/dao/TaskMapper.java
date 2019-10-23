@@ -17,4 +17,8 @@ public interface TaskMapper {
     public void saveSelectedTasks(@Param("userId") String userId,@Param("list") List<Integer> list);
 
     public void saveScanBottle(@Param("id") String id, @Param("bottleId") String bottleId, @Param("date") Timestamp date1);
+
+    public List<Task> getAllUnFinishedTasksTools(String userId);
+
+    List<Task> adminGetAllTasksByUserId(String userId);
 }

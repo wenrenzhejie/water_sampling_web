@@ -11,6 +11,8 @@ public class Task {
 
     private String userId;
 
+    private User user;
+
     private Reagent reagent;
 
     private Place place;
@@ -91,5 +93,13 @@ public class Task {
 
     public void setSelected(String selected) {
         this.selected = selected;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

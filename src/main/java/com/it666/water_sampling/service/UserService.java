@@ -21,4 +21,12 @@ public class UserService {
         User user = userMapper.loginByQrcode(userId);
         return user;
     }
+
+    public void updateUserById(User user) {
+        userMapper.updateUserById(user);
+    }
+
+    public void deleteEmployeeById(String userId) {
+        userMapper.deleteEmployeeById(userId);
+    }
 }

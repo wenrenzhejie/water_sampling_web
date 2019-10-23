@@ -50,4 +50,27 @@
     <update id="saveScanBottle">
         update tbl_task set bottleId = #{bottleId},finish_time=#{date},isFinished = 1 where id = #{id}
     </update>
+
+    <resultMap id="AllUnFinishedTasksTools" type="com.it666.water_sampling.bean.Task">
+        <result column="bottleTypeName" property="bottleType.bottleTypeName"></result>
+        <result column="reagentName" property="reagent.reagentName"></result>
+    </resultMap>
+    <!--public List<Task> getAllUnFinishedTasksTools(String userId);-->
+    <select id="getAllUnFinishedTasksTools" resultMap="AllUnFinishedTasksTools">
+        select bottleType.bottleTypeName,reagent.reagentName from tbl_task as task,tbl_bottle_type as bottleType,tbl_reagent as reagent where task.bottle_type_Id = bottleType.id and task.reagentId = reagent.id and task.userId = #{userId} and isFinished = 0
+    </select>
+
+    <resultMap id="adminGetAllTasks" type="com.it666.water_sampling.bean.Task">
+        <result column="user_name" property="user.userName"></result>
+        <result column="placeName" property="place.placeName"></result>
+        <result column="bottleTypeName" property="bottleType.bottleTypeName"></result>
+        <result column="reagentName" property="reagent.reagentName"></result>
+        <result column="finish_time" property="finishTime" javaType="date"></result>
+        <result column="isFinished" property="finished"></result>
+    </resultMap>
+    <!--List<Task> adminGetAllTasksByUserId(String userId);-->
+    <select id="adminGetAllTasksByUserId" resultMap="adminGetAllTasks">
+        SELECT `user`.user_name,place.placeName,bottle_type.bottleTypeName,reagent.reagentName,task.finish_time,task.isFinished FROM tbl_user as user,tbl_place as place,tbl_bottle_type as bottle_type,tbl_reagent as reagent,tbl_task as task
+WHERE user.user_id = task.userId and place.id = task.placeId and bottle_type.id = task.bottle_type_Id and reagent.id = task.reagentId and task.userId = #{userId} and task.isSelected = 1;
+    </select>
 </mapper>

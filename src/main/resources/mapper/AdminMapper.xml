@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it666.water_sampling.dao.AdminMapper">
+    <!--public Admin findAdminByUserNameAndPassword(String username, String password);-->
+    <select id="findAdminByUserNameAndPassword" resultType="com.it666.water_sampling.bean.admin.Admin">
+        select * from tbl_admin where username=#{username} and password=#{password}
+    </select>
+
+    <!--void saveAdmin(Admin admin);-->
+    <insert id="saveAdmin">
+        insert into tbl_admin(username,password,phone,email) values(#{username},#{password},#{phone},#{email})
+    </insert>
+
+    <!--Admin findAdminByUserName(String username);-->
+    <select id="findAdminByUserName" resultType="com.it666.water_sampling.bean.admin.Admin">
+        select * from tbl_admin where username = #{username}
+    </select>
+
+    <!--List<User> getAllEmployees();-->
+    <select id="getAllEmployees" resultType="com.it666.water_sampling.bean.User">
+        select * from tbl_user
+    </select>
+
+    <!--void saveEmployee(User user);-->
+    <insert id="saveEmployee">
+        insert into tbl_user(user_id,user_name,password) values (#{userId},#{userName},#{password})
+    </insert>
+</mapper>

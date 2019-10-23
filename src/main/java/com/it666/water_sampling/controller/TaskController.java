@@ -76,7 +76,6 @@ public class TaskController {
         List<Task> taskList = taskService.getAllUnSelectedTasks();
         List<Map<String,String>> mapList = new ArrayList<Map<String,String>>();
         for (Task task:taskList){
-                System.out.println("进来了aaaaaaaaaaaaaaaaaaaaaa");
                 Map<String,String> map = new HashMap<>();
                 map.put("id",String.valueOf(task.getId()));
                 map.put("bottleType",task.getBottleType().getBottleTypeName());
@@ -109,5 +108,31 @@ public class TaskController {
         System.out.println(date1.toString());
         taskService.saveScanBottle(id,bottleId,date1);
         return Msg.success();
+    }
+
+    @ResponseBody
+    @GetMapping("/getAllTools")
+    public Msg getAllTools(String userId){
+        List<Task> taskList = taskService.getAllUnFinishedTasksTools(userId);
+        Map<String,Integer> bottleTypeMap = new HashMap<>();
+        Map<String,Integer> reagentTypeMap = new HashMap<>();
+        for (Task task:taskList){
+            Integer bottleTypeNum = bottleTypeMap.getOrDefault(task.getBottleType().getBottleTypeName(), 0);
+            bottleTypeMap.put(task.getBottleType().getBottleTypeName(),bottleTypeNum+1);
+        }
+        for (Task task:taskList){
+            Integer reagentNum = reagentTypeMap.getOrDefault(task.getReagent().getReagentName(), 0);
+            reagentTypeMap.put(task.getReagent().getReagentName(),reagentNum+1);
+        }
+        Msg msg = Msg.success().add("totalBottles", taskList.size()).add("bottleTypeMap", bottleTypeMap).add("reagentTypeMap", reagentTypeMap);
+        System.out.println(msg.toString());
+        return msg;
+    }
+
+    @GetMapping("/adminGetAllTasksByUserId")
+    @ResponseBody
+    public Msg adminGetAllTasksByUserId(String userId){
+        List<Task> taskList = taskService.adminGetAllTasksByUserId(userId);
+        return Msg.success().add("taskList",taskList);
     }
 }

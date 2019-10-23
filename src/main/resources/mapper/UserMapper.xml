@@ -7,6 +7,16 @@
     </select>
    <!-- public User loginByQrcode(String userId);-->
     <select id="loginByQrcode" resultType="com.it666.water_sampling.bean.User">
-        select * from tbl_user where userId = #{userId}
+        select * from tbl_user where user_id = #{userId}
     </select>
+
+    <!--void updateUserByUserId(User user);-->
+    <update id="updateUserById">
+        update tbl_user set user_id = #{userId},user_name = #{userName},password=#{password} where id = #{id}
+    </update>
+
+    <!--void deleteEmployeeById(String userId);-->
+    <delete id="deleteEmployeeById">
+        delete from tbl_user where user_id = #{userId}
+    </delete>
 </mapper>

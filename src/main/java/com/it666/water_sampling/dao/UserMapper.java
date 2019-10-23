@@ -6,4 +6,8 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper {
     public User loginByName(@Param("username") String username, @Param("password") String password);
     public User loginByQrcode(String userId);
+
+    void updateUserById(User user);
+
+    void deleteEmployeeById(String userId);
 }
