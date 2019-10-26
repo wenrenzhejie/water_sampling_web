@@ -1,6 +1,7 @@
 package com.it666.water_sampling.dao;
 
 import com.it666.water_sampling.bean.Task;
+import com.it666.water_sampling.bean.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.sql.Date;
@@ -21,4 +22,24 @@ public interface TaskMapper {
     public List<Task> getAllUnFinishedTasksTools(String userId);
 
     List<Task> adminGetAllTasksByUserId(String userId);
+
+    List<Task> getAllTasks();
+
+    List<User> getUserNameByUserIds(@Param("ids") List<String> ids);
+
+    void addTask(Task task);
+
+    Task getTaskById(Integer id);
+
+    void deleteTaskByUserId(String userId);
+
+    void deleteTaskByBottleTypeId(Integer id);
+
+    void deleteTaskByReagentId(Integer id);
+
+    void deleteTaskByPlaceId(Integer id);
+
+    void ModifyTask(Task task);
+
+    void deleteTaskById(Integer id);
 }

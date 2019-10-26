@@ -18,7 +18,7 @@
 
     <!--List<User> getAllEmployees();-->
     <select id="getAllEmployees" resultType="com.it666.water_sampling.bean.User">
-        select * from tbl_user
+        select * from tbl_user where deleted = 0
     </select>
 
     <!--void saveEmployee(User user);-->

@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.it666.water_sampling.dao.BottleTypeMapper">
+    <!--List<BottleType> getAllBottleTypes();-->
+    <select id="getAllBottleTypes" resultType="com.it666.water_sampling.bean.BottleType">
+        select * from tbl_bottle_type where deleted = 0
+    </select>
 
+    <!--BottleType getBottleTypeById(Integer id);-->
+    <select id="getBottleTypeById" resultType="com.it666.water_sampling.bean.BottleType">
+        select * from tbl_bottle_type where id = #{id}
+    </select>
+
+    <!--void modifyBottleType(BottleType bottleType);-->
+    <update id="modifyBottleType">
+        update tbl_bottle_type set bottleTypeName = #{bottleTypeName} where id = #{id}
+    </update>
+
+    <!--void addBottleType(BottleType bottleType);-->
+    <insert id="addBottleType">
+        insert into tbl_bottle_type(bottleTypeName) values(#{bottleTypeName})
+    </insert>
+
+    <!--void deleteBottleTypeById(Integer id);-->
+    <update id="deleteBottleTypeById">
+        update tbl_bottle_type set deleted = 1 where id = #{id}
+    </update>
 </mapper>

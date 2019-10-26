@@ -2,9 +2,8 @@ package com.it666.water_sampling.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.it666.water_sampling.bean.Msg;
-import com.it666.water_sampling.bean.Task;
-import com.it666.water_sampling.service.TaskService;
+import com.it666.water_sampling.bean.*;
+import com.it666.water_sampling.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +19,14 @@ import java.util.*;
 public class TaskController {
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private PlaceService placeService;
+    @Autowired
+    private BottleTypeService bottleTypeService;
+    @Autowired
+    private ReagentService reagentService;
+    @Autowired
+    private AdminService adminService;
     @ResponseBody
     @GetMapping("/getAllTasksByUserId")
     public List<String> getAllTasksByUserId(String userId){
@@ -132,7 +139,70 @@ public class TaskController {
     @GetMapping("/adminGetAllTasksByUserId")
     @ResponseBody
     public Msg adminGetAllTasksByUserId(String userId){
+        System.out.println("adminGetAllTasksByUserId"+userId);
         List<Task> taskList = taskService.adminGetAllTasksByUserId(userId);
         return Msg.success().add("taskList",taskList);
+    }
+
+    @GetMapping("/getAllTasks")
+    @ResponseBody
+    public Msg getAllTasks(){
+        List<Task> taskList = taskService.getAllTasks();
+        return Msg.success().add("taskList",taskList);
+    }
+
+    @GetMapping("/getAllInfo")
+    @ResponseBody
+    public Msg getAllInfo(){
+        List<Place> places = placeService.getAllPlaces();
+        List<BottleType> bottleTypes = bottleTypeService.getAllBottleTypes();
+        List<Reagent> reagents = reagentService.getAllReagent();
+        List<User> employees = adminService.getAllEmployees();
+        return Msg.success().add("places",places)
+                .add("bottleTypes",bottleTypes)
+                .add("reagents",reagents)
+                .add("employees",employees);
+    }
+
+    @PostMapping("/addTask")
+    @ResponseBody
+    public Msg addTask(Task task){
+        if (task.getUser().getUserId().equals("-1")){
+            task.getUser().setUserId(null);
+        }
+        taskService.addTask(task);
+        return Msg.success();
+    }
+
+    @GetMapping("/getTaskById")
+    @ResponseBody
+    public Msg getTaskById(Integer id){
+        Task currentTask = taskService.getTaskById(id);
+        List<Place> places = placeService.getAllPlaces();
+        List<BottleType> bottleTypes = bottleTypeService.getAllBottleTypes();
+        List<Reagent> reagents = reagentService.getAllReagent();
+        List<User> employees = adminService.getAllEmployees();
+        return Msg.success().add("places",places)
+                .add("bottleTypes",bottleTypes)
+                .add("reagents",reagents)
+                .add("employees",employees)
+                .add("currentTask",currentTask);
+    }
+
+    @PostMapping("/ModifyTask")
+    @ResponseBody
+    public Msg ModifyTask(Task task){
+        if (task.getUser().getUserId().equals("-1")){
+            task.getUser().setUserId(null);
+        }
+        taskService.ModifyTask(task);
+        return Msg.success();
+    }
+
+    @GetMapping("/deleteTaskById")
+    @ResponseBody
+    public Msg deleteTaskById(Integer id){
+        taskService.deleteTaskById(id);
+        return Msg.success();
     }
 }

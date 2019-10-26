@@ -2,6 +2,7 @@ package com.it666.water_sampling.controller;
 
 import com.it666.water_sampling.bean.Msg;
 import com.it666.water_sampling.bean.User;
+import com.it666.water_sampling.service.TaskService;
 import com.it666.water_sampling.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TaskService taskService;
     @ResponseBody
     @PostMapping("/loginByName")
     public Msg login(String username, String password){
@@ -52,7 +55,6 @@ public class UserController {
     @PostMapping("/updateEmployee")
     @ResponseBody
     public Msg updateEmployee(User user){
-        System.out.println(user.getId()+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         userService.updateUserById(user);
         return Msg.success();
     }
@@ -61,6 +63,7 @@ public class UserController {
     @ResponseBody
     public Msg deleteEmployeeById(String userId){
         userService.deleteEmployeeById(userId);
+        taskService.deleteTaskByUserId(userId);
         return Msg.success();
     }
 }

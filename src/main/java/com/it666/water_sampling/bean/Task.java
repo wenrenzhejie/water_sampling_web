@@ -9,8 +9,6 @@ public class Task {
 
     private Bottle bottle;
 
-    private String userId;
-
     private User user;
 
     private Reagent reagent;
@@ -22,6 +20,7 @@ public class Task {
     private String finished;
 
     private String selected;
+
 
     public Integer getId() {
         return id;
@@ -45,14 +44,6 @@ public class Task {
 
     public void setBottle(Bottle bottle) {
         this.bottle = bottle;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public Reagent getReagent() {
@@ -101,5 +92,20 @@ public class Task {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", bottleType=" + bottleType +
+                ", bottle=" + bottle +
+                ", user=" + user +
+                ", reagent=" + reagent +
+                ", place=" + place +
+                ", finishTime=" + finishTime +
+                ", finished='" + finished + '\'' +
+                ", selected='" + selected + '\'' +
+                '}';
     }
 }

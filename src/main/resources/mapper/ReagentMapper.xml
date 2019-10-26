@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.it666.water_sampling.dao.ReagentMapper">
+    <!--List<Reagent> reagentList();-->
+    <select id="reagentList" resultType="com.it666.water_sampling.bean.Reagent">
+        select * from tbl_reagent where deleted = 0
+    </select>
 
+    <!--void addReagent(Reagent reagent);-->
+    <insert id="addReagent">
+        insert into tbl_reagent(reagentName)values(#{reagentName})
+    </insert>
+
+    <!--Reagent getReagentById(Integer id);-->
+    <select id="getReagentById" resultType="com.it666.water_sampling.bean.Reagent">
+        select * from tbl_reagent where id = #{id}
+    </select>
+
+    <!--void modifyReagent(Reagent reagent);-->
+    <update id="modifyReagent">
+        update tbl_reagent set reagentName = #{reagentName} where id = #{id}
+    </update>
+
+    <!--void deleteReagentById(Integer id);-->
+    <delete id="deleteReagentById">
+        update tbl_reagent set deleted = 1 where id = #{id}
+    </delete>
 </mapper>

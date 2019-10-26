@@ -8,7 +8,7 @@
         <result property="place.placeName" column="placeName"></result>
     </resultMap>
     <select id="getAllTasksByUserId" resultMap="allTasks">
-      select tbl_place.id,tbl_place.placeName,tbl_task.isFinished from tbl_task,tbl_place where tbl_task.placeId = tbl_place.id and tbl_task.userId= #{userId}
+      select tbl_place.id,tbl_place.placeName,tbl_task.isFinished from tbl_task,tbl_place where tbl_task.placeId = tbl_place.id and tbl_task.userId= #{userId} and tbl_task.deleted = 0
     </select>
 
     <!--public List<Task> getCurrentTasksByUserIdAndLocation(String userId, double latitude, double longitude);-->
@@ -23,7 +23,7 @@
         <result column="longitude_two" property="place.longitudeTwo"></result>
     </resultMap>
     <select id="getCurrentTasksByUserIdAndLocation" resultMap="currentTasks">
-        select task.id,btype.bottleTypeName,reagent.reagentName,place.placeName,place.latitude_one,place.latitude_two,place.longitude_one,place.longitude_two from tbl_task as task,tbl_bottle_type as btype,tbl_reagent as reagent,tbl_place as place where task.bottle_type_Id = btype.id and task.reagentId = reagent.id and task.placeId = place.id and userId = #{userId} and task.isFinished = 0
+        select task.id,btype.bottleTypeName,reagent.reagentName,place.placeName,place.latitude_one,place.latitude_two,place.longitude_one,place.longitude_two from tbl_task as task,tbl_bottle_type as btype,tbl_reagent as reagent,tbl_place as place where task.bottle_type_Id = btype.id and task.reagentId = reagent.id and task.placeId = place.id and userId = #{userId} and task.isFinished = 0 and task.deleted = 0
     </select>
 
     <resultMap id="allUnSelectedTasks" type="com.it666.water_sampling.bean.Task">
@@ -34,7 +34,7 @@
     </resultMap>
     <!--public List<Task> getAllUnSelectedTasks();-->
     <select id="getAllUnSelectedTasks" resultMap="allUnSelectedTasks">
-        select task.id,btype.bottleTypeName,reagent.reagentName,place.placeName from tbl_task as task,tbl_bottle_type as btype,tbl_reagent as reagent,tbl_place as place where task.bottle_type_Id = btype.id and task.reagentId = reagent.id and task.placeId = place.id and task.isSelected = 0
+        select task.id,btype.bottleTypeName,reagent.reagentName,place.placeName from tbl_task as task,tbl_bottle_type as btype,tbl_reagent as reagent,tbl_place as place where task.bottle_type_Id = btype.id and task.reagentId = reagent.id and task.placeId = place.id and task.isSelected = 0 and task.deleted = 0
     </select>
 
     <!--public void saveSelectedTasks(@Param("userId") String userId, @Param("id") List<Integer> list);-->
@@ -57,7 +57,7 @@
     </resultMap>
     <!--public List<Task> getAllUnFinishedTasksTools(String userId);-->
     <select id="getAllUnFinishedTasksTools" resultMap="AllUnFinishedTasksTools">
-        select bottleType.bottleTypeName,reagent.reagentName from tbl_task as task,tbl_bottle_type as bottleType,tbl_reagent as reagent where task.bottle_type_Id = bottleType.id and task.reagentId = reagent.id and task.userId = #{userId} and isFinished = 0
+        select bottleType.bottleTypeName,reagent.reagentName from tbl_task as task,tbl_bottle_type as bottleType,tbl_reagent as reagent where task.bottle_type_Id = bottleType.id and task.reagentId = reagent.id and task.userId = #{userId} and isFinished = 0 and task.deleted = 0
     </select>
 
     <resultMap id="adminGetAllTasks" type="com.it666.water_sampling.bean.Task">
@@ -71,6 +71,84 @@
     <!--List<Task> adminGetAllTasksByUserId(String userId);-->
     <select id="adminGetAllTasksByUserId" resultMap="adminGetAllTasks">
         SELECT `user`.user_name,place.placeName,bottle_type.bottleTypeName,reagent.reagentName,task.finish_time,task.isFinished FROM tbl_user as user,tbl_place as place,tbl_bottle_type as bottle_type,tbl_reagent as reagent,tbl_task as task
-WHERE user.user_id = task.userId and place.id = task.placeId and bottle_type.id = task.bottle_type_Id and reagent.id = task.reagentId and task.userId = #{userId} and task.isSelected = 1;
+WHERE user.user_id = task.userId and place.id = task.placeId and bottle_type.id = task.bottle_type_Id and reagent.id = task.reagentId and task.userId = #{userId} and task.isSelected = 1 and task.deleted = 0
     </select>
+
+
+    <resultMap id="adminAllTasks" type="com.it666.water_sampling.bean.Task">
+        <id column="id" property="id"></id>
+        <result column="userId" property="user.userId"></result>
+        <result column="bottleTypeName" property="bottleType.bottleTypeName"></result>
+        <result column="reagentName" property="reagent.reagentName"></result>
+        <result column="placeName" property="place.placeName"></result>
+    </resultMap>
+    <!--List<Task> getAllTasks();-->
+    <select id="getAllTasks" resultMap="adminAllTasks">
+        select task.id as id,task.userId as userId,btype.bottleTypeName,reagent.reagentName,place.placeName from tbl_task as task,tbl_bottle_type as btype,tbl_reagent as reagent,tbl_place as place where task.bottle_type_Id = btype.id and task.reagentId = reagent.id and task.placeId = place.id and task.deleted = 0
+    </select>
+
+    <!--List<User> getUserNameByUserIds(@Param("ids") List<String> ids);-->
+    <select id="getUserNameByUserIds" resultType="com.it666.water_sampling.bean.User">
+        select * from tbl_user where user_id in
+        <foreach collection="ids" index="index" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--void addTask(Task task);-->
+    <insert id="addTask">
+        <if test="user.userId==null">
+            insert into tbl_task(bottle_type_Id,reagentId,placeId)values(#{bottleType.id},#{reagent.id},#{place.id})
+        </if>
+        <if test="user.userId != null">
+            insert into tbl_task(bottle_type_Id,reagentId,placeId,userId)values(#{bottleType.id},#{reagent.id},#{place.id},#{user.userId})
+        </if>
+
+    </insert>
+
+    <resultMap id="taskById" type="com.it666.water_sampling.bean.Task">
+        <id column="id" property="id"></id>
+        <result column="bottle_type_Id" property="bottleType.id"></result>
+        <result column="userId" property="user.userId"></result>
+        <result column="reagentId" property="reagent.id"></result>
+        <result column="placeId" property="place.id"></result>
+    </resultMap>
+    <!--Task getTaskById(Integer id);-->
+    <select id="getTaskById" resultMap="taskById">
+        select * from tbl_task where id = #{id}
+    </select>
+
+    <!--void deleteTaskByUserId(String userId);-->
+    <update id="deleteTaskByUserId">
+        update tbl_task set deleted = 1 where userId = #{userId}
+    </update>
+    <!--void deleteTaskByBottleTypeId(Integer id);-->
+    <update id="deleteTaskByBottleTypeId">
+        update tbl_task set deleted = 1 where bottle_type_Id = #{id}
+    </update>
+    <!--void deleteTaskByReagentId(Integer id);-->
+    <update id="deleteTaskByReagentId">
+        update tbl_task set deleted = 1 where reagentId = #{id}
+    </update>
+
+    <!--void deleteTaskByPlaceId(Integer id);-->
+    <update id="deleteTaskByPlaceId">
+        update tbl_task set deleted = 1 where placeId = #{id};
+    </update>
+
+    <!--void ModifyTask(Task task);-->
+    <update id="ModifyTask">
+        <if test="user.userId == null">
+            update tbl_task set bottle_type_id = #{bottleType.id},reagentId=#{reagent.id},placeId = #{place.id},userId=default where id = #{id}
+        </if>
+        <if test="user.userId != null">
+            update tbl_task set bottle_type_id = #{bottleType.id},reagentId=#{reagent.id},placeId = #{place.id},userId = #{user.userId} where id = #{id}
+        </if>
+    </update>
+
+    <!--void deleteTaskById(Integer id);-->
+    <update id="deleteTaskById">
+        update tbl_task set deleted = 1 where id = #{id}
+    </update>
+
 </mapper>

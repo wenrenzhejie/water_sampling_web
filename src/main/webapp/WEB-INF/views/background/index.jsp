@@ -70,14 +70,10 @@
         </div>
         <%--<div class="meun-title">账号管理</div>--%>
         <div class="meun-item meun-item-active" aria-controls="employee" role="tab" data-toggle="tab" id="employee_manager"><img src="${pageContext.servletContext.contextPath}/static/background/images/icon_source.png">员工管理</div>
-        <div class="meun-item" aria-controls="sour" role="tab" data-toggle="tab" id="sour_manager"><img src="${pageContext.servletContext.contextPath}/static/background/images/icon_chara_grey.png">权限管理</div>
-        <div class="meun-item" href="#user" aria-controls="user" role="tab" data-toggle="tab"><img src="${pageContext.servletContext.contextPath}/static/background/images/icon_user_grey.png">用户管理</div>
-        <div class="meun-item" href="#chan" aria-controls="chan" role="tab" data-toggle="tab"><img src="${pageContext.servletContext.contextPath}/static/background/images/icon_change_grey.png">修改密码</div>
-        <div class="meun-title">地区管理</div>
-        <div class="meun-item" href="#scho" aria-controls="scho" role="tab" data-toggle="tab"><img src="${pageContext.servletContext.contextPath}/static/background/images/icon_house_grey.png">地区管理</div>
-        <div class="meun-item" href="#regu" aria-controls="regu" role="tab" data-toggle="tab"><img src="${pageContext.servletContext.contextPath}/static/background/images/icon_rule_grey.png">规则管理</div>
-        <div class="meun-item" href="#stud" aria-controls="stud" role="tab" data-toggle="tab"><img src="${pageContext.servletContext.contextPath}/static/background/images/icon_card_grey.png">人员信息</div>
-        <div class="meun-item" href="#sitt" aria-controls="sitt" role="tab" data-toggle="tab"><img src="${pageContext.servletContext.contextPath}/static/background/images/icon_char_grey.png">座位管理</div>
+        <div class="meun-item" aria-controls="bottleType" role="tab" data-toggle="tab" id="bottleType_manager"><img src="${pageContext.servletContext.contextPath}/static/background/images/icon_chara_grey.png">瓶子类型</div>
+        <div class="meun-item" aria-controls="reagentType" role="tab" data-toggle="tab" id="reagentType_manager"><img src="${pageContext.servletContext.contextPath}/static/background/images/icon_user_grey.png" >试剂类型</div>
+        <div class="meun-item" aria-controls="place" role="tab" data-toggle="tab" id="place_manager"><img src="${pageContext.servletContext.contextPath}/static/background/images/icon_change_grey.png">地点管理</div>
+        <div class="meun-item" aria-controls="task" role="tab" data-toggle="tab" id="task_manager"><img src="${pageContext.servletContext.contextPath}/static/background/images/icon_source.png">任务管理</div>
     </div>
     <!-- 右侧具体内容栏目 -->
     <div id="rightContent">
@@ -409,8 +405,952 @@
                 </div>
                 <!-- /.modal -->
             </div>
-            <!-- 资源管理模块 -->
-            <div role="tabpanel" class="tab-pane sour" id="sour">
+            <!--查看任务的界面-->
+            <div role="tabpanel" class="tab-pane employee_task" id="employee_task">
+                <div class="check-div form-inline">
+                    <div class="col-xs-3 col-lg-offset-5" style="font-weight: bolder">
+                        所有任务
+                    </div>
+                    <div class="col-lg-2 col-lg-offset-2" style=" padding-right: 40px;text-align: right;">
+                        <label>排序:&nbsp;</label>
+                        <select class=" form-control">
+                            <option>地区</option>
+                            <option>地区</option>
+                            <option>班期</option>
+                            <option>性别</option>
+                            <option>年龄</option>
+                            <option>份数</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="data-div">
+                    <div class="row tableHeader">
+                        <div class="col-xs-2 ">
+                            序号
+                        </div>
+                        <div class="col-xs-2">
+                            采样人
+                        </div>
+                        <div class="col-xs-2">
+                            采样地点
+                        </div>
+                        <div class="col-xs-2">
+                            瓶子类型
+                        </div>
+                        <div class="col-xs-2">
+                            试剂类型
+                        </div>
+                        <div class="col-xs-2">
+                            完成时间
+                        </div>
+                    </div>
+                    <div class="tablebody">
+
+                        <div class="row">
+                            <div class="col-xs-2">
+                                goodmoning
+                            </div>
+                            <div class="col-xs-2">
+                                国际关系地区
+                            </div>
+                            <div class="col-xs-2">
+                                李豆豆
+                            </div>
+                            <div class="col-xs-2">
+                                13688889999
+                            </div>
+                            <div class="col-xs-2">
+                                状态
+                            </div>
+                            <div class="col-xs-2">
+                                <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#reviseUser">修改</button>
+                                <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteUser">删除</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--页码块-->
+               <%-- <footer class="footer">
+                    <ul class="pagination">
+                        <li>
+                            <select>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                            页
+                        </li>
+                        <li class="gray">
+                            共20页
+                        </li>
+                        <li>
+                            <i class="glyphicon glyphicon-menu-left">
+                            </i>
+                        </li>
+                        <li>
+                            <i class="glyphicon glyphicon-menu-right">
+                            </i>
+                        </li>
+                    </ul>
+                </footer>--%>
+
+                <!--弹出添加用户窗口-->
+             <%--   <div class="modal fade" id="addUser" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">添加用户</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal">
+                                        <div class="form-group ">
+                                            <label for="sName" class="col-xs-3 control-label">用户名：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sLink" class="col-xs-3 control-label">真实姓名：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sOrd" class="col-xs-3 control-label">电子邮箱：</label>
+                                            <div class="col-xs-8">
+                                                <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sKnot" class="col-xs-3 control-label">电话：</label>
+                                            <div class="col-xs-8">
+                                                <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sKnot" class="col-xs-3 control-label">地区：</label>
+                                            <div class="col-xs-8">
+                                                <select class=" form-control select-duiqi">
+                                                    <option value="">国际关系地区</option>
+                                                    <option value="">北京大学</option>
+                                                    <option value="">天津大学</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sKnot" class="col-xs-3 control-label">权限：</label>
+                                            <div class="col-xs-8">
+                                                <select class=" form-control select-duiqi">
+                                                    <option value="">管理员</option>
+                                                    <option value="">普通用户</option>
+                                                    <option value="">游客</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="situation" class="col-xs-3 control-label">状态：</label>
+                                            <div class="col-xs-8">
+                                                <label class="control-label" for="anniu">
+                                                    <input type="radio" name="situation" id="normal">正常</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <label class="control-label" for="meun">
+                                                    <input type="radio" name="situation" id="forbid"> 禁用</label>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn btn-xs btn-green">保 存</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>--%>
+                <!-- /.modal -->
+
+                <!--弹出修改用户窗口-->
+               <%-- <div class="modal fade" id="reviseUser" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">修改用户</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal">
+                                        <div class="form-group ">
+                                            <label for="sName" class="col-xs-3 control-label">用户名：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sLink" class="col-xs-3 control-label">真实姓名：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sOrd" class="col-xs-3 control-label">电子邮箱：</label>
+                                            <div class="col-xs-8">
+                                                <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sKnot" class="col-xs-3 control-label">电话：</label>
+                                            <div class="col-xs-8">
+                                                <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sKnot" class="col-xs-3 control-label">地区：</label>
+                                            <div class="col-xs-8">
+                                                <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sKnot" class="col-xs-3 control-label">权限：</label>
+                                            <div class="col-xs-8">
+                                                <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="situation" class="col-xs-3 control-label">状态：</label>
+                                            <div class="col-xs-8">
+                                                <label class="control-label" for="anniu">
+                                                    <input type="radio" name="situation" id="normal">正常</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <label class="control-label" for="meun">
+                                                    <input type="radio" name="situation" id="forbid"> 禁用</label>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn btn-xs btn-green">保 存</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>--%>
+                <!-- /.modal -->
+
+                <!--弹出删除用户警告窗口-->
+                <%--<div class="modal fade" id="deleteUser" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    确定要删除该用户？删除后不可恢复！
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn  btn-xs btn-danger">保 存</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>--%>
+                <!-- /.modal -->
+
+            </div>
+            <!-- 瓶子类型管理模块 -->
+            <div role="tabpanel" class="tab-pane bottleType" id="bottleType">
+                <div class="check-div form-inline">
+                    <div class="col-xs-3">
+                        <button class="btn btn-yellow btn-xs" data-toggle="modal" id="addBottleType_modal_btn">添加瓶子类型 </button>
+                    </div>
+                </div>
+                <!--页码块-->
+                <div class="data-div">
+                    <div class="row tableHeader">
+                        <div class="col-xs-4 " id="bottleType_id">
+                            序号
+                        </div>
+                        <div class="col-xs-4 " id="bottleType_bottleTypeName">
+                            瓶子类型
+                        </div>
+                        <div class="col-xs-4">
+                            操作
+                        </div>
+                    </div>
+                    <div class="tablebody">
+
+                    </div>
+                </div>
+               <%-- <footer class="footer">
+                <ul class="pagination">
+                <li>
+                <select>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                </select>
+                页
+                </li>
+                <li class="gray">
+                共20页
+                </li>
+                <li>
+                <i class="glyphicon glyphicon-menu-left">
+                </i>
+                </li>
+                <li>
+                <i class="glyphicon glyphicon-menu-right">
+                </i>
+                </li>
+                </ul>
+                </footer>--%>
+                <!--弹出添加瓶子类型窗口-->
+                <div class="modal fade" id="addBottleTypeModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">添加采样瓶分类</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal" id="addBottleType_form">
+                                        <div class="form-group">
+                                            <label for="add_bottleType" class="col-xs-3 control-label">类型：</label>
+                                            <div class="col-xs-8">
+                                                <input type="text" class="form-control input-sm duiqi" id="add_bottleType" placeholder="" name="bottleTypeName">
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn btn-xs btn-green" id="addBottleTye_save_button">保 存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--弹出修改采样瓶类型窗口-->
+                <div class="modal fade" id="modifyBottleTypeModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">修改</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal" id="bottleType_modify_form">
+                                        <input type="hidden" name="id" id="bottleType_modify_id">
+                                        <div class="form-group ">
+                                            <label for="bottleType_modify_name" class="col-xs-3 control-label">类型：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi" id="bottleType_modify_name" name="bottleTypeName">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn btn-xs btn-green" id="bottleType_modify_button">修改</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
+                <!--弹出删除采样瓶类型警告窗口-->
+                <div class="modal fade" id="deleteBottleTypeModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">提示</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    确定要删除该种类型的采样瓶？删除后不可恢复！
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn  btn-xs btn-danger" id="bottleType_delete_button">确定</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>
+            <!-- 试剂类型管理模块 -->
+            <div role="tabpanel" class="tab-pane reagentType" id="reagentType">
+                <div class="check-div form-inline">
+                    <div class="col-xs-3">
+                        <button class="btn btn-yellow btn-xs" data-toggle="modal" id="addReagentType_modal_btn">添加试剂 </button>
+                    </div>
+                </div>
+                <!--页码块-->
+                <div class="data-div">
+                    <div class="row tableHeader">
+                        <div class="col-xs-4 " id="reagentType_id">
+                            序号
+                        </div>
+                        <div class="col-xs-4 " id="reagentType_reagentName">
+                            试剂类型
+                        </div>
+                        <div class="col-xs-4">
+                            操作
+                        </div>
+                    </div>
+                    <div class="tablebody">
+
+                    </div>
+                </div>
+                <%-- <footer class="footer">
+                 <ul class="pagination">
+                 <li>
+                 <select>
+                 <option>1</option>
+                 <option>2</option>
+                 <option>3</option>
+                 <option>4</option>
+                 <option>5</option>
+                 <option>6</option>
+                 <option>7</option>
+                 <option>8</option>
+                 <option>9</option>
+                 <option>10</option>
+                 </select>
+                 页
+                 </li>
+                 <li class="gray">
+                 共20页
+                 </li>
+                 <li>
+                 <i class="glyphicon glyphicon-menu-left">
+                 </i>
+                 </li>
+                 <li>
+                 <i class="glyphicon glyphicon-menu-right">
+                 </i>
+                 </li>
+                 </ul>
+                 </footer>--%>
+                <!--弹出添加试剂类型窗口-->
+                <div class="modal fade" id="addReagentTypeModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">添加试剂</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal" id="addReagentType_form">
+                                        <div class="form-group">
+                                            <label for="add_reagentType" class="col-xs-3 control-label">类型：</label>
+                                            <div class="col-xs-8">
+                                                <input type="text" class="form-control input-sm duiqi" id="add_reagentType" placeholder="" name="reagentName">
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn btn-xs btn-green" id="addReagentType_save_button">保 存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--弹出修改试剂类型窗口-->
+                <div class="modal fade" id="modifyReagentTypeModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">修改</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal" id="reagentType_modify_form">
+                                        <input type="hidden" name="id" id="reagentType_modify_id">
+                                        <div class="form-group ">
+                                            <label for="bottleType_modify_name" class="col-xs-3 control-label">类型：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi" id="reagentType_modify_name" name="reagentName">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn btn-xs btn-green" id="reagentType_modify_button">修改</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
+                <!--弹出删除试剂类型警告窗口-->
+                <div class="modal fade" id="deleteReagentTypeModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">提示</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    确定要删除该种类型的采样瓶？删除后不可恢复！
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn  btn-xs btn-danger" id="reagentType_delete_button">确定</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>
+            <!-- 地点管理模块 -->
+            <div role="tabpanel" class="tab-pane place" id="place">
+                <div class="check-div form-inline">
+                    <div class="col-xs-3">
+                        <button class="btn btn-yellow btn-xs" data-toggle="modal" id="addPlace_modal_btn">添加地点 </button>
+                    </div>
+                </div>
+                <!--页码块-->
+                <div class="data-div">
+                    <div class="row tableHeader">
+                        <div class="col-xs-4 " id="place_id">
+                            序号
+                        </div>
+                        <div class="col-xs-4 " id="place_placeName">
+                            地点
+                        </div>
+                        <div class="col-xs-4">
+                            操作
+                        </div>
+                    </div>
+                    <div class="tablebody">
+
+                    </div>
+                </div>
+                <%-- <footer class="footer">
+                 <ul class="pagination">
+                 <li>
+                 <select>
+                 <option>1</option>
+                 <option>2</option>
+                 <option>3</option>
+                 <option>4</option>
+                 <option>5</option>
+                 <option>6</option>
+                 <option>7</option>
+                 <option>8</option>
+                 <option>9</option>
+                 <option>10</option>
+                 </select>
+                 页
+                 </li>
+                 <li class="gray">
+                 共20页
+                 </li>
+                 <li>
+                 <i class="glyphicon glyphicon-menu-left">
+                 </i>
+                 </li>
+                 <li>
+                 <i class="glyphicon glyphicon-menu-right">
+                 </i>
+                 </li>
+                 </ul>
+                 </footer>--%>
+                <!--弹出添加地点窗口-->
+                <div class="modal fade" id="addPlaceModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">添加地点</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal" id="addPlace_form">
+                                        <div class="form-group">
+                                            <label for="add_place" class="col-xs-3 control-label">地点名称：</label>
+                                            <div class="col-xs-8">
+                                                <input type="text" class="form-control input-sm duiqi" id="add_place" placeholder="" name="placeName">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="add_longitudeOne" class="col-xs-3 control-label">经度1：</label>
+                                            <div class="col-xs-8">
+                                                <input type="text" class="form-control input-sm duiqi" id="add_longitudeOne" placeholder="" name="longitudeOne">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="add_latitudeOne" class="col-xs-3 control-label">纬度1：</label>
+                                            <div class="col-xs-8">
+                                                <input type="text" class="form-control input-sm duiqi" id="add_latitudeOne" placeholder="" name="latitudeOne">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="add_longitudeTwo" class="col-xs-3 control-label">经度2：</label>
+                                            <div class="col-xs-8">
+                                                <input type="text" class="form-control input-sm duiqi" id="add_longitudeTwo" placeholder="" name="longitudeTwo">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="add_latitudeTwo" class="col-xs-3 control-label">纬度2：</label>
+                                            <div class="col-xs-8">
+                                                <input type="text" class="form-control input-sm duiqi" id="add_latitudeTwo" placeholder="" name="latitudeTwo">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn btn-xs btn-green" id="addPlace_save_button">保 存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--弹出修改地点窗口-->
+                <div class="modal fade" id="modifyPlaceModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">修改</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal" id="place_modify_form">
+                                        <input type="hidden" name="id" id="place_modify_id">
+                                        <div class="form-group ">
+                                            <label for="place_modify_name" class="col-xs-3 control-label">地点：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi" id="place_modify_name" name="placeName">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="place_modify_longitudeOne" class="col-xs-3 control-label">经度1：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi" id="place_modify_longitudeOne" name="longitudeOne">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="place_modify_latitudeOne" class="col-xs-3 control-label">纬度1：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi" id="place_modify_latitudeOne" name="latitudeOne">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="place_modify_longitudeTwo" class="col-xs-3 control-label">经度2：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi" id="place_modify_longitudeTwo" name="longitudeTwo">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="place_modify_latitudeTwo" class="col-xs-3 control-label">纬度2：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi" id="place_modify_latitudeTwo" name="latitudeTwo">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn btn-xs btn-green" id="place_modify_button">修改</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
+                <!--弹出删除试剂类型警告窗口-->
+                <div class="modal fade" id="deletePlaceModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">提示</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    确定要删除该地点？删除后不可恢复！
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn  btn-xs btn-danger" id="place_delete_button">确定</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>
+            <!--任务管理模块-->
+            <div role="tabpanel" class="tab-pane task" id="task">
+                <div class="check-div form-inline">
+                    <div class="col-xs-3">
+                        <button class="btn btn-yellow btn-xs" data-toggle="modal" id="addTask_modal_btn">添加任务 </button>
+                    </div>
+                    <%--关键字搜索--%>
+                    <%--<div class="col-xs-4">
+                        <input type="text" class="form-control input-sm" placeholder="输入文字搜索">
+                        <button class="btn btn-white btn-xs ">查 询 </button>
+                    </div>--%>
+                    <%--按照条件进行排序--%>
+                    <%--<div class="col-lg-3 col-lg-offset-2 col-xs-4" style=" padding-right: 40px;text-align: right;">
+                        <label for="paixu">排序:&nbsp;</label>
+                        <select class=" form-control">
+                            <option>地区</option>
+                            <option>地区</option>
+                            <option>班期</option>
+                            <option>性别</option>
+                            <option>年龄</option>
+                            <option>份数</option>
+                        </select>
+                    </div>--%>
+                </div>
+                <div class="data-div">
+                    <div class="row tableHeader">
+                        <div class="col-xs-2 " id="task_id">
+                            序号
+                        </div>
+                        <div class="col-xs-2 " id="task_placeName">
+                            采样地点
+                        </div>
+                        <div class="col-xs-2" id="task_reagent">
+                            试剂类型
+                        </div>
+                        <div class="col-xs-2" id="task_bottleType">
+                            瓶子类型
+                        </div>
+                        <div class="col-xs-2" id="task_user">
+                            采样人
+                        </div>
+                        <%--<div class="col-xs-1" id="task_finishTime">
+                            完成时间
+                        </div>--%>
+                        <div class="col-xs-2">
+                            操作
+                        </div>
+                    </div>
+                    <div class="tablebody">
+                        <%--        <div class="row">
+                                    <div class="col-xs-2">
+                                        1
+                                    </div>
+                                    <div class="col-xs-2 ">
+                                        123455
+                                    </div>
+                                    <div class="col-xs-2">
+                                        张三
+                                    </div>
+                                    <div class="col-xs-2">
+                                        123
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#reviseUser">修改</button>
+                                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteUser">删除</button>
+                                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#reviseUser">任务</button>
+                                    </div>
+                                </div>--%>
+
+                    </div>
+
+                </div>
+                <!--弹出添加任务窗口-->
+                <div class="modal fade" id="addTaskModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">添加任务</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal" id="addTask_form">
+                                         <div class="form-group">
+                                        <label for="add_task_placeName" class="col-xs-3 control-label">地点：</label>
+                                        <div class="col-xs-8">
+                                            <select class=" form-control select-duiqi" id="add_task_placeName" name="place.id">
+                                            </select>
+                                        </div>
+                                    </div>
+                                        <div class="form-group">
+                                            <label for="add_task_bottleTypeName" class="col-xs-3 control-label">瓶子类型：</label>
+                                            <div class="col-xs-8">
+                                                <select class=" form-control select-duiqi" id="add_task_bottleTypeName" name="bottleType.id">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="add_task_reagentName" class="col-xs-3 control-label">试剂类型：</label>
+                                            <div class="col-xs-8">
+                                                <select class=" form-control select-duiqi" id="add_task_reagentName" name="reagent.id">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="add_task_userName" class="col-xs-3 control-label">采样人：</label>
+                                            <div class="col-xs-8">
+                                                <select class=" form-control select-duiqi" id="add_task_userName" name="user.userId">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn btn-xs btn-green" id="addTask_save_button">保 存</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!--弹出修改任务窗口-->
+                <div class="modal fade" id="modifyTaskModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">修改任务</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal" id="task_modify_form">
+                                        <input type="hidden" name="id" id="task_modify_id">
+                                        <div class="form-group">
+                                            <label for="modify_task_placeName" class="col-xs-3 control-label">地点：</label>
+                                            <div class="col-xs-8">
+                                                <select class=" form-control select-duiqi" id="modify_task_placeName" name="place.id">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="modify_task_bottleTypeName" class="col-xs-3 control-label">瓶子类型：</label>
+                                            <div class="col-xs-8">
+                                                <select class=" form-control select-duiqi" id="modify_task_bottleTypeName" name="bottleType.id">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="modify_task_reagentName" class="col-xs-3 control-label">试剂类型：</label>
+                                            <div class="col-xs-8">
+                                                <select class=" form-control select-duiqi" id="modify_task_reagentName" name="reagent.id">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="modify_task_userName" class="col-xs-3 control-label">采样人：</label>
+                                            <div class="col-xs-8">
+                                                <select class=" form-control select-duiqi" id="modify_task_userName" name="user.userId">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn btn-xs btn-green" id="task_modify_button">修改</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
+                <!--弹出删除任务警告窗口-->
+                <div class="modal fade" id="deleteTaskModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">提示</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    确定要删除该员工？删除后不可恢复！
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn  btn-xs btn-danger" id="task_delete_button">确定</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>
+            <%--<div role="tabpanel" class="tab-pane sour" id="sour">
                 <div class="check-div form-inline">
                     <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addSource">添加资源</button>
                 </div>
@@ -940,277 +1880,6 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
                                 <button type="button" class="btn btn-xs btn-danger">保 存</button>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
-
-            </div>
-            <!--查看任务的界面-->
-            <div role="tabpanel" class="tab-pane employee_task" id="employee_task">
-                <div class="check-div form-inline">
-                    <div class="col-xs-3 col-lg-offset-5" style="font-weight: bolder">
-                        所有任务
-                    </div>
-                    <div class="col-lg-2 col-lg-offset-2" style=" padding-right: 40px;text-align: right;">
-                        <label>排序:&nbsp;</label>
-                        <select class=" form-control">
-                            <option>地区</option>
-                            <option>地区</option>
-                            <option>班期</option>
-                            <option>性别</option>
-                            <option>年龄</option>
-                            <option>份数</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="data-div">
-                    <div class="row tableHeader">
-                        <div class="col-xs-2 ">
-                            序号
-                        </div>
-                        <div class="col-xs-2">
-                            采样人
-                        </div>
-                        <div class="col-xs-2">
-                            采样地点
-                        </div>
-                        <div class="col-xs-2">
-                            瓶子类型
-                        </div>
-                        <div class="col-xs-2">
-                            试剂类型
-                        </div>
-                        <div class="col-xs-2">
-                            完成时间
-                        </div>
-                    </div>
-                    <div class="tablebody">
-
-                        <div class="row">
-                            <div class="col-xs-2">
-                                goodmoning
-                            </div>
-                            <div class="col-xs-2">
-                                国际关系地区
-                            </div>
-                            <div class="col-xs-2">
-                                李豆豆
-                            </div>
-                            <div class="col-xs-2">
-                                13688889999
-                            </div>
-                            <div class="col-xs-2">
-                                状态
-                            </div>
-                            <div class="col-xs-2">
-                                <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#reviseUser">修改</button>
-                                <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteUser">删除</button>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <!--页码块-->
-               <%-- <footer class="footer">
-                    <ul class="pagination">
-                        <li>
-                            <select>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                            </select>
-                            页
-                        </li>
-                        <li class="gray">
-                            共20页
-                        </li>
-                        <li>
-                            <i class="glyphicon glyphicon-menu-left">
-                            </i>
-                        </li>
-                        <li>
-                            <i class="glyphicon glyphicon-menu-right">
-                            </i>
-                        </li>
-                    </ul>
-                </footer>--%>
-
-                <!--弹出添加用户窗口-->
-                <div class="modal fade" id="addUser" role="dialog" aria-labelledby="gridSystemModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="gridSystemModalLabel">添加用户</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <form class="form-horizontal">
-                                        <div class="form-group ">
-                                            <label for="sName" class="col-xs-3 control-label">用户名：</label>
-                                            <div class="col-xs-8 ">
-                                                <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sLink" class="col-xs-3 control-label">真实姓名：</label>
-                                            <div class="col-xs-8 ">
-                                                <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sOrd" class="col-xs-3 control-label">电子邮箱：</label>
-                                            <div class="col-xs-8">
-                                                <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sKnot" class="col-xs-3 control-label">电话：</label>
-                                            <div class="col-xs-8">
-                                                <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sKnot" class="col-xs-3 control-label">地区：</label>
-                                            <div class="col-xs-8">
-                                                <select class=" form-control select-duiqi">
-                                                    <option value="">国际关系地区</option>
-                                                    <option value="">北京大学</option>
-                                                    <option value="">天津大学</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sKnot" class="col-xs-3 control-label">权限：</label>
-                                            <div class="col-xs-8">
-                                                <select class=" form-control select-duiqi">
-                                                    <option value="">管理员</option>
-                                                    <option value="">普通用户</option>
-                                                    <option value="">游客</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="situation" class="col-xs-3 control-label">状态：</label>
-                                            <div class="col-xs-8">
-                                                <label class="control-label" for="anniu">
-                                                    <input type="radio" name="situation" id="normal">正常</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <label class="control-label" for="meun">
-                                                    <input type="radio" name="situation" id="forbid"> 禁用</label>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                                <button type="button" class="btn btn-xs btn-green">保 存</button>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
-
-                <!--弹出修改用户窗口-->
-                <div class="modal fade" id="reviseUser" role="dialog" aria-labelledby="gridSystemModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="gridSystemModalLabel">修改用户</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <form class="form-horizontal">
-                                        <div class="form-group ">
-                                            <label for="sName" class="col-xs-3 control-label">用户名：</label>
-                                            <div class="col-xs-8 ">
-                                                <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sLink" class="col-xs-3 control-label">真实姓名：</label>
-                                            <div class="col-xs-8 ">
-                                                <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sOrd" class="col-xs-3 control-label">电子邮箱：</label>
-                                            <div class="col-xs-8">
-                                                <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sKnot" class="col-xs-3 control-label">电话：</label>
-                                            <div class="col-xs-8">
-                                                <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sKnot" class="col-xs-3 control-label">地区：</label>
-                                            <div class="col-xs-8">
-                                                <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sKnot" class="col-xs-3 control-label">权限：</label>
-                                            <div class="col-xs-8">
-                                                <input type="" class="form-control input-sm duiqi" id="sKnot" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="situation" class="col-xs-3 control-label">状态：</label>
-                                            <div class="col-xs-8">
-                                                <label class="control-label" for="anniu">
-                                                    <input type="radio" name="situation" id="normal">正常</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <label class="control-label" for="meun">
-                                                    <input type="radio" name="situation" id="forbid"> 禁用</label>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                                <button type="button" class="btn btn-xs btn-green">保 存</button>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
-
-                <!--弹出删除用户警告窗口-->
-                <div class="modal fade" id="deleteUser" role="dialog" aria-labelledby="gridSystemModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    确定要删除该用户？删除后不可恢复！
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                                <button type="button" class="btn  btn-xs btn-danger">保 存</button>
                             </div>
                         </div>
                         <!-- /.modal-content -->
@@ -2188,13 +2857,14 @@
                 </div>
                 <!-- /.modal -->
 
-            </div>
+            </div>--%>
         </div>
     </div>
 </div>
 
 <script>
     getAllEmployees();
+    //员工管理模块---begin
     $("#employee_manager").click(function () {
         $("#rightContent .tab-content .tab-pane").removeClass("active");
         // var  aria = "."+$(this).attr("aria-controls");
@@ -2341,12 +3011,479 @@
         //关闭模态框
         $("#deleteUserModal").modal('hide');
     });
+    //员工管理模块---end
 
-    $("#sour_manager").click(function () {
+    //采集瓶类型管理模块---begin
+    $("#bottleType_manager").click(function () {
         $("#rightContent .tab-content .tab-pane").removeClass("active");
         var  aria = "."+$(this).attr("aria-controls");
         $("#rightContent .tab-content "+aria).addClass("active");
+        getAllBottleTypes();
     });
+    //增加瓶子类型之弹出模态框
+    $("#addBottleType_modal_btn").click(function () {
+        //    清除模态框中表单的内容
+        $("#addBottleType_form #add_bottleType").val("");
+        //    弹出模态框
+        $("#addBottleTypeModal").modal({
+            backdrop:"static"
+        });
+    });
+    //增加瓶子类型之保存至数据库
+    $("#addBottleTye_save_button").click(function () {
+        $.post("${pageContext.servletContext.contextPath}/bottleType/addBottleType",$("#addBottleType_form").serialize(),function (data) {
+            //    关闭模态框
+            $("#addBottleTypeModal").modal('hide');
+            getAllBottleTypes();
+        })
+    });
+    //修改瓶子类型之回显数据
+    $(document).on("click",".btn_bottleType_modify",function(){
+        let id = $(this).attr("id");
+        $.get( "${pageContext.servletContext.contextPath}/bottleType/getBottleTypeById?id="+id, function(msg) {
+            let bottleType = msg.data.bottleType;
+            //    展示要修改的员工信息
+            $("#bottleType_modify_id").val(bottleType.id);
+            $("#bottleType_modify_name").val(bottleType.bottleTypeName);
+            //    弹出模态框
+            $("#modifyBottleTypeModal").modal({
+                backdrop:"static"
+            });
+        });
+    });
+    //修改瓶子类型之修改
+    $("#bottleType_modify_button").click(function () {
+        $.post("${pageContext.servletContext.contextPath}/bottleType/modifyBottleType",$("#bottleType_modify_form").serialize(),function (data) {
+            //    关闭模态框
+            $("#modifyBottleTypeModal").modal('hide');
+            //    重新加载所有的瓶子
+            getAllBottleTypes();
+        })
+    });
+    //删除瓶子类型之弹出模态框
+    $(document).on("click",".btn_bottleType_delete",function(){
+        let id = $(this).attr("id");
+        $("#bottleType_delete_button").attr("did",id);
+        //弹出模态框
+        $("#deleteBottleTypeModal").modal({
+            backdrop:"static"
+        });
+    });
+    $("#bottleType_delete_button").click(function (data) {
+        let id = $(this).attr("did");
+        $.get("${pageContext.servletContext.contextPath}/bottleType/deleteBottleTypeById?id="+id,function (data) {
+            $("#deleteBottleTypeModal").modal('hide');
+            getAllBottleTypes();
+        })
+    });
+    function getAllBottleTypes() {
+        $("#rightContent .tab-content .bottleType .data-div>.tablebody").empty();
+        $.get("${pageContext.servletContext.contextPath}/bottleType/getAllBottleTypes",function (data) {
+            // console.log(data);
+            $.each(data.data.bottleTypeList,function (index,item) {
+                let row = $("<div></div>").addClass("row");
+                let id = $("<div></div>").addClass("col-xs-4").append(index+1);
+                let bottleTypeName = $("<div></div>").addClass("col-xs-4").append(item.bottleTypeName);
+                let btn_modify = $("<button></button>").addClass("btn btn-success btn_bottleType_modify btn-xs").attr("id",item.id).append("修改");
+                let btn_delete = $("<button></button>").addClass("btn btn-danger btn_bottleType_delete btn-xs").attr("id",item.id).append("删除");
+                let btn_div = $("<div></div>").addClass("col-xs-4").append("\n").append(btn_modify).append("\n").append(btn_delete).append("\n");
+                row.append(id)
+                    .append(bottleTypeName)
+                    .append(btn_div);
+                $("#rightContent .tab-content .bottleType .data-div>.tablebody")
+                    .append(row);
+            })
+        });
+    }
+    //试剂类型管理模块----begin
+    $("#reagentType_manager").click(function () {
+        $("#rightContent .tab-content .tab-pane").removeClass("active");
+        var  aria = "."+$(this).attr("aria-controls");
+        $("#rightContent .tab-content "+aria).addClass("active");
+        getAllReagent();
+    });
+    //增加试剂类型之弹出模态框
+    $("#addReagentType_modal_btn").click(function () {
+        //    清除模态框中表单的内容
+        $("#addReagentType_form #add_reagentType").val("");
+        //    弹出模态框
+        $("#addReagentTypeModal").modal({
+            backdrop:"static"
+        });
+    });
+    //增加试剂类型之保存至数据库
+    $("#addReagentType_save_button").click(function () {
+        $.post("${pageContext.servletContext.contextPath}/reagent/addReagent",$("#addReagentType_form").serialize(),function (data) {
+            //    关闭模态框
+            $("#addReagentTypeModal").modal('hide');
+            getAllReagent();
+        })
+    });
+    //修改试剂类型之回显数据
+    $(document).on("click",".btn_reagent_modify",function(){
+        let id = $(this).attr("id");
+        $.get( "${pageContext.servletContext.contextPath}/reagent/getReagentById?id="+id, function(msg) {
+            let reagent = msg.data.reagent;
+            //    展示要修改的员工信息
+            $("#reagentType_modify_id").val(reagent.id);
+            $("#reagentType_modify_name").val(reagent.reagentName);
+            //    弹出模态框
+            $("#modifyReagentTypeModal").modal({
+                backdrop:"static"
+            });
+        });
+    });
+    //修改试剂类型之修改
+    $("#reagentType_modify_button").click(function () {
+        $.post("${pageContext.servletContext.contextPath}/reagent/modifyReagent",$("#reagentType_modify_form").serialize(),function (data) {
+            //    关闭模态框
+            $("#modifyReagentTypeModal").modal('hide');
+            //    重新加载所有的瓶子
+            getAllReagent();
+        })
+    });
+    //删除试剂类型之弹出模态框
+    $(document).on("click",".btn_reagent_delete",function(){
+        // getAllReagent();
+        let id = $(".btn_reagent_delete").attr("id");
+        $("#deleteReagentTypeModal #reagentType_delete_button").attr("did",id);
+        alert(id);
+        //弹出模态框
+        $("#deleteReagentTypeModal").modal({
+            backdrop:"static"
+        });
+
+    });
+    $("#reagentType_delete_button").click(function (data) {
+        let id = $(this).attr("did");
+        $.ajax({
+            url:'${pageContext.servletContext.contextPath}/reagent/deleteReagentById/'+id,
+            type:'DELETE',
+            success:function(data){
+                $("#deleteReagentTypeModal").modal('hide');
+                getAllReagent();
+            }
+        });
+    });
+    //获取所有试剂
+    function getAllReagent() {
+        $("#rightContent .tab-content .reagentType .data-div>.tablebody").empty();
+        $.get("${pageContext.servletContext.contextPath}/reagent/getAllReagent",function (data) {
+            console.log(data);
+            $.each(data.data.reagentList,function (index,item) {
+                let row = $("<div></div>").addClass("row");
+                let id = $("<div></div>").addClass("col-xs-4").append(index+1);
+                let reagentTypeName = $("<div></div>").addClass("col-xs-4").append(item.reagentName);
+                let btn_modify = $("<button></button>").addClass("btn btn-success btn_reagent_modify btn-xs").attr("id",item.id).append("修改");
+                let btn_delete = $("<button></button>").addClass("btn btn-danger btn_reagent_delete btn-xs").attr("id",item.id).append("删除");
+                let btn_div = $("<div></div>").addClass("col-xs-4").append("\n").append(btn_modify).append("\n").append(btn_delete).append("\n");
+                row.append(id)
+                    .append(reagentTypeName)
+                    .append(btn_div);
+                $("#rightContent .tab-content .reagentType .data-div>.tablebody")
+                    .append(row);
+            })
+        });
+    }
+    //试剂类型管理模块----end
+
+    //地点管理模块---begin
+    $("#place_manager").click(function () {
+        $("#rightContent .tab-content .tab-pane").removeClass("active");
+        var  aria = "."+$(this).attr("aria-controls");
+        $("#rightContent .tab-content "+aria).addClass("active");
+        getAllPlaces();
+    });
+    //增加地点之弹出模态框
+    $("#addPlace_modal_btn").click(function () {
+        //    清除模态框中表单的内容
+        $("#addPlace_form #add_place").val("");
+        $("#addPlace_form #add_latitudeOne").val("");
+        $("#addPlace_form #add_longitudeOne").val("");
+        $("#addPlace_form #add_latitudeTwo").val("");
+        $("#addPlace_form #add_longitudeTwo").val("");
+        //    弹出模态框
+        $("#addPlaceModal").modal({
+            backdrop:"static"
+        });
+    });
+    //增加地点之保存至数据库
+    $("#addPlace_save_button").click(function () {
+        $.post("${pageContext.servletContext.contextPath}/place/addPlace",$("#addPlace_form").serialize(),function (data) {
+            //    关闭模态框
+            $("#addPlaceModal").modal('hide');
+            getAllPlaces();
+        })
+    });
+    //修改地点之回显数据
+    $(document).on("click",".btn_place_modify",function(){
+        let id = $(this).attr("id");
+        $.get( "${pageContext.servletContext.contextPath}/place/getPlaceById?id="+id, function(msg) {
+            console.log(msg);
+            let place = msg.data.place;
+            //    展示要修改的员工信息
+            $("#place_modify_id").val(place.id);
+            $("#place_modify_name").val(place.placeName);
+            $("#place_modify_longitudeOne").val(place.longitudeOne);
+            $("#place_modify_latitudeOne").val(place.latitudeOne);
+            $("#place_modify_longitudeTwo").val(place.longitudeTwo);
+            $("#place_modify_latitudeTwo").val(place.latitudeTwo);
+
+            //    弹出模态框
+            $("#modifyPlaceModal").modal({
+                backdrop:"static"
+            });
+        });
+    });
+    //修改地点之修改
+    $("#place_modify_button").click(function () {
+        $.post("${pageContext.servletContext.contextPath}/place/modifyPlace",$("#place_modify_form").serialize(),function (data) {
+            //    关闭模态框
+            $("#modifyPlaceModal").modal('hide');
+            //    重新加载所有的地点
+            getAllPlaces();
+        })
+    });
+    //删除地点之弹出模态框
+    $(document).on("click",".btn_place_delete",function(){
+        let id = $(this).attr("id");
+        $("#place_delete_button").attr("did",id);
+        //弹出模态框
+        $("#deletePlaceModal").modal({
+            backdrop:"static"
+        });
+    });
+    $("#place_delete_button").click(function (data) {
+        let id = $(this).attr("did");
+        $.get("${pageContext.servletContext.contextPath}/place/deletePlaceById?id="+id,function (data) {
+            $("#deletePlaceModal").modal('hide');
+            getAllPlaces();
+        })
+    });
+    function getAllPlaces() {
+        $("#rightContent .tab-content .place .data-div>.tablebody").empty();
+        $.get("${pageContext.servletContext.contextPath}/place/getAllPlaces",function (data) {
+            // console.log(data);
+            $.each(data.data.placeList,function (index,item) {
+                let row = $("<div></div>").addClass("row");
+                let id = $("<div></div>").addClass("col-xs-4").append(index+1);
+                let placeName = $("<div></div>").addClass("col-xs-4").append(item.placeName);
+                let btn_modify = $("<button></button>").addClass("btn btn-success btn_place_modify btn-xs").attr("id",item.id).append("修改");
+                let btn_delete = $("<button></button>").addClass("btn btn-danger btn_place_delete btn-xs").attr("id",item.id).append("删除");
+                let btn_div = $("<div></div>").addClass("col-xs-4").append("\n").append(btn_modify).append("\n").append(btn_delete).append("\n");
+                row.append(id)
+                    .append(placeName)
+                    .append(btn_div);
+                $("#rightContent .tab-content .place .data-div>.tablebody")
+                    .append(row);
+            })
+        });
+    }
+
+    //任务管理模块---begin
+    $("#task_manager").click(function () {
+        $("#rightContent .tab-content .tab-pane").removeClass("active");
+        // var  aria = "."+$(this).attr("aria-controls");
+        $("#rightContent .tab-content .task").addClass("active");
+
+        //    发送ajax请求获取所有员工数据并展示
+        getAllTasks();
+    });
+    /*获取所有任务的信息*/
+    function getAllTasks(){
+        //清空所有数据
+        $("#rightContent .tab-content .task .data-div>.tablebody").empty();
+        $.get("${pageContext.servletContext.contextPath}/task/getAllTasks",function (data) {
+            console.log(data);
+            $.each(data.data.taskList,function (index,item) {
+                // console.log(item.userName)
+                let row = $("<div></div>").addClass("row");
+                let id = $("<div></div>").addClass("col-xs-2").append(index+1);
+                let placeName = $("<div></div>").addClass("col-xs-2").append(item.place.placeName);
+                let reagent = $("<div></div>").addClass("col-xs-2").append(item.reagent.reagentName);
+                let bottleType = $("<div></div>").addClass("col-xs-2").append(item.bottleType.bottleTypeName);
+                let user = $("<div></div>").addClass("col-xs-2").append(item.user.userName);
+                let btn_modify = $("<button></button>").addClass("btn btn-success btn_task_modify btn-xs").attr("did",item.id).append("修改");
+                let btn_delete = $("<button></button>").addClass("btn btn-danger btn_task_delete btn-xs").attr("did",item.id).append("删除");
+                let btn_div = $("<div></div>").addClass("col-xs-2").append(btn_modify).append("\n").append(btn_delete).append("\n");
+                row.append(id)
+                    .append(placeName)
+                    .append(reagent)
+                    .append(bottleType)
+                    .append(user)
+                    .append(btn_div);
+                $("#rightContent .tab-content .task .data-div>.tablebody").append(row);
+            })
+
+        });
+    }
+    //添加任务之弹出模态框
+    $("#addTask_modal_btn").click(function () {
+      /*  //    清除模态框中表单的内容
+        $("#addUser_form #add_userId").val("");
+        $("#addUser_form #add_userName").val("");
+        $("#addUser_form #add_password").val("");*/
+        //发送请求获取采样地点、瓶子类型、试剂类型、所有员工
+        $.get("${pageContext.servletContext.contextPath}/task/getAllInfo",function (data) {
+            console.log(data);
+            //清空之前的内容
+            $("#addTaskModal #addTask_form .form-control").empty();
+            //回显地点
+            let place_option1 = $("<option></option>").attr("value",-1).append("---请选择---");
+            $("#add_task_placeName").append(place_option1);
+            $.each(data.data.places,function (index,item) {
+               let option2 = $("<option></option>").attr("value",item.id).append(item.placeName);
+                $("#add_task_placeName").append(option2);
+            });
+            //回显瓶子类型
+            let bottleType_option1 = $("<option></option>").attr("value",-1).append("---请选择---");
+            $("#add_task_bottleTypeName").append(bottleType_option1);
+            $.each(data.data.bottleTypes,function (index,item) {
+                let option2 = $("<option></option>").attr("value",item.id).append(item.bottleTypeName);
+                $("#add_task_bottleTypeName").append(option2);
+            });
+            //回显试剂类型
+            let reagent_option1 = $("<option></option>").attr("value",-1).append("---请选择---");
+            $("#add_task_reagentName").append(reagent_option1);
+            $.each(data.data.reagents,function (index,item) {
+
+                let option2 = $("<option></option>").attr("value",item.id).append(item.reagentName);
+                $("#add_task_reagentName").append(option2);
+            });
+            //回显员工
+            let user_option1 = $("<option></option>").attr("value","-1").append("---请选择---");
+            $("#add_task_userName").append(user_option1);
+            $.each(data.data.employees,function (index,item) {
+                let option2 = $("<option></option>").attr("value",item.userId).append(item.userName);
+                $("#add_task_userName").append(option2);
+            });
+            //    弹出模态框
+            $("#addTaskModal").modal({
+                backdrop:"static"
+            });
+        });
+
+    });
+    // 添加任务
+    $("#addTask_save_button").click(function () {
+        $.post( "${pageContext.servletContext.contextPath}/task/addTask", $( "#addTask_form" ).serialize(),function (data) {
+            // console.log(data);
+            //    关闭模态框
+            $("#addTaskModal").modal('hide');
+            //    重新加载所有的员工
+            getAllTasks();
+        });
+    });
+    //修改任务之数据回显
+    $(document).on("click",".btn_task_modify",function(){
+        let did = $(this).attr("did");
+        $.get( "${pageContext.servletContext.contextPath}/task/getTaskById?id="+did, function(data) {
+            console.log(data);
+            let currentTask = data.data.currentTask;
+            //清空之前的内容
+            $("#modifyTaskModal #task_modify_form .form-control").empty();
+            $("#task_modify_id").val(did);
+            //回显地点
+            let option2 = null;
+            $.each(data.data.places,function (index,item) {
+               if (currentTask.place.id == item.id){
+                   option2= $("<option></option>")
+                       .attr("value",item.id)
+                       .attr("selected",true)
+                       .append(item.placeName);
+               }else {
+                  option2 = $("<option></option>")
+                       .attr("value",item.id)
+                       .append(item.placeName);
+               }
+                $("#modify_task_placeName").append(option2);
+            });
+            //回显试剂类型
+            $.each(data.data.reagents,function (index,item) {
+                if (currentTask.reagent.id == item.id){
+                    option2= $("<option></option>")
+                        .attr("value",item.id)
+                        .attr("selected",true)
+                        .append(item.reagentName);
+                }else {
+                    option2 = $("<option></option>")
+                        .attr("value",item.id)
+                        .append(item.reagentName);
+                }
+                $("#modify_task_reagentName").append(option2);
+            });
+            //回显瓶子类型
+            $.each(data.data.bottleTypes,function (index,item) {
+                if (currentTask.bottleType.id == item.id){
+                    option2= $("<option></option>")
+                        .attr("value",item.id)
+                        .attr("selected",true)
+                        .append(item.bottleTypeName);
+                }else {
+                    option2 = $("<option></option>")
+                        .attr("value",item.id)
+                        .append(item.bottleTypeName);
+                }
+                $("#modify_task_bottleTypeName").append(option2);
+            });
+            //回显采样人
+            let user_option1 = $("<option></option>").attr("value","-1").append("---暂不分配---");
+            $("#modify_task_userName").append(user_option1);
+               if (currentTask.user == null){
+                   $.each(data.data.employees,function (index,item) {
+                       let option = $("<option></option>").attr("value",item.userId).append(item.userName);
+                       $("#modify_task_userName").append(option);
+                   });
+               } else {
+                   $.each(data.data.employees,function (index,item) {
+                       if (currentTask.user.userId == item.userId){
+                           option2= $("<option></option>")
+                               .attr("value",item.id)
+                               .attr("selected",true)
+                               .append(item.userName);
+                       }else {
+                           option2 = $("<option></option>")
+                               .attr("value",item.id)
+                               .append(item.userName);
+                       }
+                       $("#modify_task_userName").append(option2);
+               });
+               }
+
+            //    弹出模态框
+            $("#modifyTaskModal").modal({
+                backdrop:"static"
+            });
+        });
+    });
+    //修改任务之保存到数据库
+    $("#task_modify_button").click(function () {
+        $.post( "${pageContext.servletContext.contextPath}/task/ModifyTask", $( "#task_modify_form" ).serialize(),function (data) {
+            // console.log(data);
+            //    关闭模态框
+            $("#modifyTaskModal").modal('hide');
+            //    重新加载所有的员工
+            getAllTasks();
+        });
+    });
+    //删除任务之弹出模态框
+    $(document).on("click",".btn_task_delete",function(){
+        let did = $(this).attr("did");
+        $("#task_delete_button").attr("did",did);
+        //弹出模态框
+        $("#deleteTaskModal").modal({
+            backdrop:"static"
+        });
+    });
+    //删除任务
+    $("#task_delete_button").click(function (data) {
+        let id = $(this).attr("did");
+        $.get("${pageContext.servletContext.contextPath}/task/deleteTaskById?id="+id,function (data) {
+            $("#deleteTaskModal").modal('hide');
+            getAllTasks();
+        })
+    });
+
 </script>
 <!-- 滑块js -->
 <!--	<script type="text/javascript">
