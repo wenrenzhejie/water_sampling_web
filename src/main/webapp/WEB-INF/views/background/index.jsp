@@ -3147,7 +3147,6 @@
         // getAllReagent();
         let id = $(".btn_reagent_delete").attr("id");
         $("#deleteReagentTypeModal #reagentType_delete_button").attr("did",id);
-        alert(id);
         //弹出模态框
         $("#deleteReagentTypeModal").modal({
             backdrop:"static"
